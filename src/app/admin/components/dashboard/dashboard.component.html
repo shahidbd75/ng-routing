@@ -1,1 +1,17 @@
 <h3>Dashboard......</h3>
+
+<input class="form-control" [(ngModel)]="item" type="number" />
+<p>
+  {{ item }}
+</p>
+
+<input
+  type="text"
+  class="form-control"
+  [ngModel]="name"
+  (ngModelChange)="onNameChange($event)"
+/>
+
+<p>
+  {{ name }}
+</p>

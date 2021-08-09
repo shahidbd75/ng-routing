@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
@@ -13,6 +14,6 @@ import { SupplierComponent } from './components/supplier/supplier.component';
     SupplierComponent,
     DeliveryComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule],
+  imports: [CommonModule, AdminRoutingModule, FormsModule],
 })
 export class AdminModule {}

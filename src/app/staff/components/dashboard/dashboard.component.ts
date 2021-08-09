@@ -10,7 +10,4 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
-  navigateToOrder() {
-    this.router.navigate(['/orders']);
-  }
 }

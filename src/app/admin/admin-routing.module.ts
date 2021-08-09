@@ -6,11 +6,11 @@ import { ProductsComponent } from './components/products/products.component';
 import { SupplierComponent } from './components/supplier/supplier.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: DashboardComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'supplier', component: SupplierComponent },
   { path: 'delivery', component: DeliveryComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

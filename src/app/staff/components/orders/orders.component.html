@@ -1,5 +1,47 @@
 <div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+  class="
+    d-flex
+    justify-content-between
+    flex-wrap flex-md-nowrap
+    align-items-center
+    pt-3
+    pb-2
+    mb-3
+    border-bottom
+  "
 >
   <h1 class="h2">Orders</h1>
 </div>
+
+<form>
+  <div class="form-group">
+    <label for="txtProduct">Product</label
+    ><input
+      type="text"
+      class="form-control"
+      id="txtProduct"
+      [(ngModel)]="product"
+      name="product"
+    />
+  </div>
+  <div class="form-group">
+    <label for="txtQty">Quantity</label
+    ><input
+      type="number"
+      class="form-control"
+      id="Quantity"
+      [(ngModel)]="qty"
+      name="qty"
+    />
+  </div>
+  <div class="form-group">
+    <label for="txtLocation">Delivery Location</label
+    ><input
+      type="text"
+      class="form-control"
+      id="txtLocation"
+      [(ngModel)]="dLocation"
+      name="dLocation"
+    />
+  </div>
+</form>

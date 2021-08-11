@@ -11,7 +11,7 @@ export class CustomerComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
+    this.activatedRoute.params.subscribe((params: Params) => {
       this.customer = {
         id: params.id,
         name: params.name,

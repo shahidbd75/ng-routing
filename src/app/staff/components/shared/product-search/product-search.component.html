@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">Product Search</div>
+  <div class="card-body">
+    <form [formGroup]="searchForm">
+      <div class="form-group">
+        <label for="txtKeyword">Keyword</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          name="keyword"
+          id="txtKeyword"
+          formControlName="keyword"
+        />
+      </div>
+      <div>
+        <label for="ddlStatus">Status</label>
+        <select
+          class="form-control form-control-sm"
+          type="text"
+          name="status"
+          formControlName="status"
+          id="ddlStatus"
+        >
+          <option [value]="null">Please select</option>
+          <option *ngFor="let s of status" [value]="s.id">{{ s.name }}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+</div>

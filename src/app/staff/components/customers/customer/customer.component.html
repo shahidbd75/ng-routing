@@ -1,8 +1,14 @@
-<p>Customer Information</p>
-
-<address>
-  <b>{{ customer.id }}</b>
-  <p>{{ customer.name }}</p>
-</address>
-
-<button [routerLink]="['/customer', '1', 'shahid']">Get Customer</button>
+<div class="d-flex flex-row justify-content-between flex-wrap mt-2">
+  <div class="flex-item">
+    <h2>Customer Information</h2>
+  </div>
+  <div class="flex-item">
+    <button
+      class="btn btn-sm btn-outline-warning"
+      [routerLink]="['/staff/customers']"
+      routerLinkActive="active"
+    >
+      <i class="fas fa-arrow-left"></i>Back
+    </button>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { StaffLayoutComponent } from './staff/components/staff-layout/staff-layout.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
@@ -27,7 +28,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, RouterModule.forRoot(routes), AdminModule],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

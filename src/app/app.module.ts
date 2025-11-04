@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminModule } from './admin/admin.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from './admin/components/layout/layout.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -26,8 +26,8 @@ const routes: Routes = [
   { path: '**', component: PageNotFoundComponent },
 ];
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes), AdminModule],
+  declarations: [AppComponent, LoginComponent, PageNotFoundComponent],
+  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, ReactiveFormsModule],
   providers: [
     provideAnimationsAsync()
   ],

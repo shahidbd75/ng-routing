@@ -1,0 +1,182 @@
+<div class="settings-container">
+  <div class="settings-header mb-4">
+    <h2 class="settings-title">
+      <i class="bi bi-gear-fill me-2"></i>Settings
+    </h2>
+    <p class="settings-subtitle text-muted">Customize your application theme and preferences</p>
+  </div>
+
+  <div class="row">
+    <!-- Theme Customization Card -->
+    <div class="col-lg-8 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            <i class="bi bi-palette me-2"></i>Theme Customization
+          </h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="settingsForm">
+            <!-- Preset Themes -->
+            <div class="mb-4">
+              <label for="presetTheme" class="form-label fw-bold">
+                <i class="bi bi-collection me-2"></i>Preset Themes
+              </label>
+              <select
+                class="form-select"
+                id="presetTheme"
+                formControlName="presetTheme"
+                (change)="onPresetThemeChange($event)"
+              >
+                <option value="">Choose a preset theme...</option>
+                <option *ngFor="let theme of presetThemes" [value]="theme.name">
+                  {{ theme.name }}
+                </option>
+              </select>
+              <small class="form-text text-muted">Select a preset theme or customize colors below</small>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Primary Color -->
+            <div class="mb-4">
+              <label for="primaryColor" class="form-label fw-bold">
+                <i class="bi bi-circle-fill me-2" [style.color]="currentTheme.primary"></i>Primary Color
+              </label>
+              <div class="input-group">
+                <input
+                  type="color"
+                  class="form-control form-control-color"
+                  id="primaryColor"
+                  formControlName="primaryColor"
+                  (input)="onPrimaryColorChange()"
+                  [value]="currentTheme.primary"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="primaryColor"
+                  (input)="onPrimaryColorChange()"
+                  [value]="currentTheme.primary"
+                  placeholder="#22c55e"
+                />
+              </div>
+              <small class="form-text text-muted">This color is used for primary actions, links, and highlights</small>
+            </div>
+
+            <!-- Secondary Color -->
+            <div class="mb-4">
+              <label for="secondaryColor" class="form-label fw-bold">
+                <i class="bi bi-circle-fill me-2" [style.color]="currentTheme.secondary"></i>Secondary Color
+              </label>
+              <div class="input-group">
+                <input
+                  type="color"
+                  class="form-control form-control-color"
+                  id="secondaryColor"
+                  formControlName="secondaryColor"
+                  (input)="onSecondaryColorChange()"
+                  [value]="currentTheme.secondary"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="secondaryColor"
+                  (input)="onSecondaryColorChange()"
+                  [value]="currentTheme.secondary"
+                  placeholder="#a855f7"
+                />
+              </div>
+              <small class="form-text text-muted">This color is used for secondary actions and accents</small>
+            </div>
+
+            <!-- Reset Button -->
+            <div class="d-flex justify-content-end">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="resetTheme()"
+              >
+                <i class="bi bi-arrow-counterclockwise me-2"></i>Reset to Default
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theme Preview Card -->
+    <div class="col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="mb-0">
+            <i class="bi bi-eye me-2"></i>Theme Preview
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="theme-preview">
+            <!-- Primary Color Preview -->
+            <div class="preview-item mb-3">
+              <div class="preview-label mb-2">Primary</div>
+              <div class="color-box" [style.background-color]="currentTheme.primary"></div>
+              <div class="mt-2">
+                <button class="btn btn-sm w-100" [style.background-color]="currentTheme.primary" [style.color]="'white'">
+                  Primary Button
+                </button>
+              </div>
+            </div>
+
+            <!-- Secondary Color Preview -->
+            <div class="preview-item mb-3">
+              <div class="preview-label mb-2">Secondary</div>
+              <div class="color-box" [style.background-color]="currentTheme.secondary"></div>
+              <div class="mt-2">
+                <button class="btn btn-sm w-100" [style.background-color]="currentTheme.secondary" [style.color]="'white'">
+                  Secondary Button
+                </button>
+              </div>
+            </div>
+
+            <!-- Combined Preview -->
+            <div class="preview-item">
+              <div class="preview-label mb-2">Combined</div>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-sm"
+                  [style.background-color]="currentTheme.primary"
+                  [style.color]="'white'"
+                  [style.border-color]="currentTheme.primary"
+                >
+                  Primary
+                </button>
+                <button
+                  class="btn btn-sm"
+                  [style.background-color]="currentTheme.secondary"
+                  [style.color]="'white'"
+                  [style.border-color]="currentTheme.secondary"
+                >
+                  Secondary
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Card -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">
+        <i class="bi bi-info-circle me-2 text-primary"></i>About Theme Settings
+      </h5>
+      <p class="card-text mb-2">
+        <strong>Theme Persistence:</strong> Your theme preferences are automatically saved and will persist across browser sessions.
+      </p>
+      <p class="card-text mb-0">
+        <strong>Color Guidelines:</strong> Choose colors with good contrast ratios for better accessibility. The system automatically generates darker shades for hover states.
+      </p>
+    </div>
+  </div>
+</div>

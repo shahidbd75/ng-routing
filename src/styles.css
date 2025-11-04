@@ -2,6 +2,111 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
+/* Theme Color Variables - Default: Green Primary, Purple Secondary */
+:root {
+  --bs-primary: #22c55e;
+  --bs-secondary: #a855f7;
+  --bs-primary-dark: #16a34a;
+  --bs-secondary-dark: #9333ea;
+  --theme-primary: #22c55e;
+  --theme-secondary: #a855f7;
+  --theme-primary-dark: #16a34a;
+  --theme-secondary-dark: #9333ea;
+}
+
+/* Override Bootstrap Primary and Secondary Colors */
+.btn-primary {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--bs-primary-dark) !important;
+  border-color: var(--bs-primary-dark) !important;
+}
+
+.btn-secondary {
+  background-color: var(--bs-secondary) !important;
+  border-color: var(--bs-secondary) !important;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--bs-secondary-dark) !important;
+  border-color: var(--bs-secondary-dark) !important;
+}
+
+.btn-outline-primary {
+  color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+  color: #fff !important;
+}
+
+.btn-outline-secondary {
+  color: var(--bs-secondary) !important;
+  border-color: var(--bs-secondary) !important;
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--bs-secondary) !important;
+  border-color: var(--bs-secondary) !important;
+  color: #fff !important;
+}
+
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--bs-secondary) !important;
+}
+
+.text-primary {
+  color: var(--bs-primary) !important;
+}
+
+.text-secondary {
+  color: var(--bs-secondary) !important;
+}
+
+.border-primary {
+  border-color: var(--bs-primary) !important;
+}
+
+.border-secondary {
+  border-color: var(--bs-secondary) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(34, 197, 94, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.form-check-input:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(34, 197, 94, 0.25);
+}
+
+.nav-link.active {
+  background-color: var(--bs-primary) !important;
+  color: #fff !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--bs-primary) !important;
+}
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;

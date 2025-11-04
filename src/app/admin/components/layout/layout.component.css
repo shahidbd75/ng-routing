@@ -1,0 +1,189 @@
+/* Admin Container - Full height layout */
+.admin-container {
+  margin-top: 56px; /* Height of navbar */
+  min-height: calc(100vh - 56px);
+  padding: 0;
+}
+
+/* Top Navbar - Primary Color */
+.admin-navbar {
+  background-color: var(--theme-primary) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar Styles - Primary Color */
+.sidebar {
+  position: fixed;
+  top: 56px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--theme-primary);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 56px);
+  padding-top: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Sidebar Navigation Links */
+.sidebar-nav {
+  padding: 1rem 0;
+}
+
+.sidebar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.875rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  margin: 0.25rem 0.5rem;
+  border-radius: 8px;
+}
+
+.sidebar-nav .nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left-color: rgba(255, 255, 255, 0.5);
+  transform: translateX(5px);
+}
+
+.sidebar-nav .nav-link.active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-left-color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-nav .nav-link i {
+  width: 20px;
+  text-align: center;
+}
+
+/* Main Content Area */
+.main-content {
+  margin-left: 0;
+  padding-top: 1.5rem;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.content-wrapper {
+  padding: 1rem;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 991.98px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+
+  /* Backdrop overlay for mobile */
+  .sidebar-backdrop {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+
+  .sidebar-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 992px) {
+  .sidebar {
+    transform: translateX(0);
+    width: 16.666667%; /* col-md-3 equivalent */
+  }
+
+  .main-content {
+    margin-left: 16.666667%; /* Offset for sidebar */
+    width: 83.333333%; /* col-md-9 equivalent */
+  }
+
+  .sidebar-backdrop {
+    display: none;
+  }
+}
+
+/* Large Desktop Adjustments */
+@media (min-width: 1200px) {
+  .sidebar {
+    width: 16.666667%; /* col-lg-2 equivalent */
+  }
+
+  .main-content {
+    margin-left: 16.666667%;
+    width: 83.333333%; /* col-lg-10 equivalent */
+  }
+}
+
+/* Scrollbar Styling for Sidebar */
+.sidebar-sticky::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-sticky::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-sticky::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar-sticky::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Navbar Dropdown Adjustments */
+.dropdown-menu {
+  margin-top: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-item i {
+  width: 20px;
+}
+
+/* Additional Utilities */
+.navbar-brand {
+  font-weight: 600;
+}
+
+/* Ensure proper spacing */
+body {
+  overflow-x: hidden;
+}

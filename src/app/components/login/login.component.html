@@ -1,1 +1,329 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <!-- Left Side - Decorative/Info Section -->
+      <div class="col-lg-6 d-none d-lg-flex login-left-section">
+        <div class="login-content-wrapper">
+          <div class="logo-section mb-5">
+            <i class="bi bi-shield-check-fill login-logo"></i>
+            <h1 class="login-title">Welcome Back!</h1>
+            <p class="login-subtitle">
+              Manage your business efficiently with our powerful admin panel
+            </p>
+          </div>
+          <div class="features-list">
+            <div class="feature-item">
+              <i class="bi bi-check-circle-fill feature-icon"></i>
+              <span>Secure & Reliable</span>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-check-circle-fill feature-icon"></i>
+              <span>Easy to Use</span>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-check-circle-fill feature-icon"></i>
+              <span>24/7 Support</span>
+            </div>
+          </div>
+        </div>
+        <div class="login-background-pattern"></div>
+      </div>
+
+      <!-- Right Side - Login/Signup Form -->
+      <div class="col-lg-6 col-12 login-right-section">
+        <div class="login-form-wrapper">
+          <!-- Logo for Mobile -->
+          <div class="mobile-logo d-lg-none text-center mb-4">
+            <i class="bi bi-shield-check-fill mobile-logo-icon"></i>
+            <h3 class="mb-0 mt-2">Admin Panel</h3>
+          </div>
+
+          <!-- Mode Toggle -->
+          <div class="mode-toggle mb-4">
+            <div class="btn-group w-100" role="group">
+              <button
+                type="button"
+                class="btn"
+                [class.btn-primary]="isLoginMode"
+                [class.btn-outline-primary]="!isLoginMode"
+                (click)="toggleMode()"
+              >
+                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+              </button>
+              <button
+                type="button"
+                class="btn"
+                [class.btn-primary]="!isLoginMode"
+                [class.btn-outline-primary]="isLoginMode"
+                (click)="toggleMode()"
+              >
+                <i class="bi bi-person-plus me-2"></i>Sign Up
+              </button>
+            </div>
+          </div>
+
+          <!-- Login Form -->
+          <form *ngIf="isLoginMode" [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
+            <div class="form-header mb-4">
+              <h2 class="form-title">Welcome Back</h2>
+              <p class="form-subtitle">Please login to your account</p>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">
+                <i class="bi bi-envelope me-2"></i>Email Address
+              </label>
+              <input
+                type="email"
+                class="form-control form-control-lg"
+                [class.is-invalid]="hasError(loginForm, 'email', 'email') || hasError(loginForm, 'email', 'required')"
+                id="loginEmail"
+                formControlName="email"
+                placeholder="Enter your email"
+              />
+              <div class="invalid-feedback" *ngIf="hasError(loginForm, 'email', 'required')">
+                Email is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError(loginForm, 'email', 'email') && !hasError(loginForm, 'email', 'required')">
+                Please enter a valid email
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label">
+                <i class="bi bi-lock me-2"></i>Password
+              </label>
+              <div class="input-group">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="hasError(loginForm, 'password', 'required') || hasError(loginForm, 'password', 'minlength')"
+                  id="loginPassword"
+                  formControlName="password"
+                  placeholder="Enter your password"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  (click)="togglePasswordVisibility()"
+                  title="Toggle password visibility"
+                >
+                  <i class="bi" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"></i>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError(loginForm, 'password', 'required')">
+                Password is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError(loginForm, 'password', 'minlength') && !hasError(loginForm, 'password', 'required')">
+                Password must be at least 6 characters
+              </div>
+            </div>
+
+            <!-- Remember Me & Forgot Password -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rememberMe" />
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+              </div>
+              <a href="#" class="text-decoration-none">Forgot Password?</a>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg w-100 mb-3"
+              [disabled]="isLoading"
+            >
+              <span *ngIf="!isLoading">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+              </span>
+              <span *ngIf="isLoading">
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Logging in...
+              </span>
+            </button>
+          </form>
+
+          <!-- Signup Form -->
+          <form *ngIf="!isLoginMode" [formGroup]="signupForm" (ngSubmit)="onSignup()" class="auth-form">
+            <div class="form-header mb-4">
+              <h2 class="form-title">Create Account</h2>
+              <p class="form-subtitle">Fill in your information to get started</p>
+            </div>
+
+            <!-- First Name & Last Name Row -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName" class="form-label">
+                  <i class="bi bi-person me-2"></i>First Name
+                </label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="hasError(signupForm, 'firstName', 'required') || hasError(signupForm, 'firstName', 'minlength')"
+                  id="firstName"
+                  formControlName="firstName"
+                  placeholder="John"
+                />
+                <div class="invalid-feedback" *ngIf="hasError(signupForm, 'firstName', 'required')">
+                  First name is required
+                </div>
+                <div class="invalid-feedback" *ngIf="hasError(signupForm, 'firstName', 'minlength') && !hasError(signupForm, 'firstName', 'required')">
+                  First name must be at least 2 characters
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName" class="form-label">
+                  <i class="bi bi-person me-2"></i>Last Name
+                </label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="hasError(signupForm, 'lastName', 'required') || hasError(signupForm, 'lastName', 'minlength')"
+                  id="lastName"
+                  formControlName="lastName"
+                  placeholder="Doe"
+                />
+                <div class="invalid-feedback" *ngIf="hasError(signupForm, 'lastName', 'required')">
+                  Last name is required
+                </div>
+                <div class="invalid-feedback" *ngIf="hasError(signupForm, 'lastName', 'minlength') && !hasError(signupForm, 'lastName', 'required')">
+                  Last name must be at least 2 characters
+                </div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="signupEmail" class="form-label">
+                <i class="bi bi-envelope me-2"></i>Email Address
+              </label>
+              <input
+                type="email"
+                class="form-control form-control-lg"
+                [class.is-invalid]="hasError(signupForm, 'email', 'email') || hasError(signupForm, 'email', 'required')"
+                id="signupEmail"
+                formControlName="email"
+                placeholder="john.doe@example.com"
+              />
+              <div class="invalid-feedback" *ngIf="hasError(signupForm, 'email', 'required')">
+                Email is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError(signupForm, 'email', 'email') && !hasError(signupForm, 'email', 'required')">
+                Please enter a valid email
+              </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">
+                <i class="bi bi-telephone me-2"></i>Phone Number
+              </label>
+              <input
+                type="tel"
+                class="form-control form-control-lg"
+                [class.is-invalid]="hasError(signupForm, 'phoneNumber', 'required') || hasError(signupForm, 'phoneNumber', 'pattern')"
+                id="phoneNumber"
+                formControlName="phoneNumber"
+                placeholder="+1 (555) 123-4567"
+              />
+              <div class="invalid-feedback" *ngIf="hasError(signupForm, 'phoneNumber', 'required')">
+                Phone number is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError(signupForm, 'phoneNumber', 'pattern') && !hasError(signupForm, 'phoneNumber', 'required')">
+                Please enter a valid phone number
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="signupPassword" class="form-label">
+                <i class="bi bi-lock me-2"></i>Password
+              </label>
+              <div class="input-group">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="hasError(signupForm, 'password', 'required') || hasError(signupForm, 'password', 'minlength')"
+                  id="signupPassword"
+                  formControlName="password"
+                  placeholder="Create a password"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  (click)="togglePasswordVisibility()"
+                  title="Toggle password visibility"
+                >
+                  <i class="bi" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"></i>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError(signupForm, 'password', 'required')">
+                Password is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError(signupForm, 'password', 'minlength') && !hasError(signupForm, 'password', 'required')">
+                Password must be at least 8 characters
+              </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+              <label for="confirmPassword" class="form-label">
+                <i class="bi bi-lock-fill me-2"></i>Confirm Password
+              </label>
+              <div class="input-group">
+                <input
+                  [type]="showConfirmPassword ? 'text' : 'password'"
+                  class="form-control form-control-lg"
+                  [class.is-invalid]="hasError(signupForm, 'confirmPassword', 'required') || signupForm.hasError('passwordMismatch')"
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                  placeholder="Confirm your password"
+                />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  (click)="toggleConfirmPasswordVisibility()"
+                  title="Toggle password visibility"
+                >
+                  <i class="bi" [class.bi-eye]="!showConfirmPassword" [class.bi-eye-slash]="showConfirmPassword"></i>
+                </button>
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError(signupForm, 'confirmPassword', 'required')">
+                Please confirm your password
+              </div>
+              <div class="invalid-feedback" *ngIf="signupForm.hasError('passwordMismatch') && !hasError(signupForm, 'confirmPassword', 'required')">
+                Passwords do not match
+              </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" id="termsCheck" />
+              <label class="form-check-label" for="termsCheck">
+                I agree to the <a href="#" class="text-decoration-none">Terms & Conditions</a>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg w-100 mb-3"
+              [disabled]="isLoading"
+            >
+              <span *ngIf="!isLoading">
+                <i class="bi bi-person-plus me-2"></i>Create Account
+              </span>
+              <span *ngIf="isLoading">
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Creating account...
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
